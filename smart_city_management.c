@@ -6,21 +6,20 @@
 
 #define MAX_NODES 10
 
-// Structure for a vehicle
+
 struct Vehicle {
     int id;
     char type[20];
-    int currentNode; // Track the current node of the vehicle
+    int currentNode; 
     int destination;
-    bool isEmergency; // Flag to check if the vehicle is an emergency
+    bool isEmergency; 
     struct Vehicle *next;
 };
 
 struct Vehicle *head = NULL;
 int graph[MAX_NODES][MAX_NODES];
-char trafficLights[MAX_NODES][10]; // "Green" or "Red"
+char trafficLights[MAX_NODES][10]; 
 
-// Function to add a vehicle
 void addVehicle(int id, char type[], int startNode, int destination, bool isEmergency) {
     struct Vehicle *newVehicle = (struct Vehicle*) malloc(sizeof(struct Vehicle));
     newVehicle->id = id;
@@ -32,7 +31,6 @@ void addVehicle(int id, char type[], int startNode, int destination, bool isEmer
     head = newVehicle;
 }
 
-// Function to display all vehicles
 void displayVehicles() {
     struct Vehicle *temp = head;
     while (temp) {
@@ -43,7 +41,7 @@ void displayVehicles() {
     }
 }
 
-// Function to input road network graph (edges and weights)
+
 void inputGraph() {
     int edges, u, v, weight;
     printf("Enter number of edges: ");
@@ -52,18 +50,17 @@ void inputGraph() {
         printf("Enter edge (u, v, weight): ");
         scanf("%d %d %d", &u, &v, &weight);
         graph[u][v] = weight;
-        graph[v][u] = weight; // Assuming an undirected graph
+        graph[v][u] = weight; 
     }
 }
 
-// Function to manage traffic lights at each node
-// Function to manage traffic lights at each active node
+
 void manageTrafficLights() {
     printf("\nSetting traffic lights for active nodes:\n");
     for (int i = 0; i < MAX_NODES; i++) {
         bool hasEdge = false;
         for (int j = 0; j < MAX_NODES; j++) {
-            if (graph[i][j] > 0) { // Check if there's a connection
+            if (graph[i][j] > 0) { 
                 hasEdge = true;
                 break;
             }
@@ -76,7 +73,6 @@ void manageTrafficLights() {
 }
 
 
-// Function to find the shortest path using Dijkstra's Algorithm
 void dijkstra(int start, int dist[], int prev[]) {
     bool visited[MAX_NODES] = {false};
     for (int i = 0; i < MAX_NODES; i++) {
@@ -103,7 +99,7 @@ void dijkstra(int start, int dist[], int prev[]) {
     }
 }
 
-// Function to move vehicles based on Dijkstra's shortest path
+
 void moveVehicles() {
     struct Vehicle *temp = head;
     while (temp) {
@@ -129,7 +125,7 @@ void moveVehicles() {
 }
 
 int main() {
-    // Initialize graph
+
     memset(graph, 0, sizeof(graph));
 
     int choice;
@@ -158,7 +154,7 @@ int main() {
             scanf("%d", &startNode);
             printf("Enter destination node: ");
             scanf("%d", &destination);
-            printf("Is the vehicle an emergency (yes/no): ");
+            printf("Is the vehiclE an emergency (yes/no): ");
             scanf("%s", isEmergencyInput);
 
             if (strcmp(isEmergencyInput, "yes") == 0) {
@@ -178,7 +174,7 @@ int main() {
             printf("Exiting...\n");
             break;
         } else {
-            printf("Invalid choice! Try again.\n");
+            printf("Invalid choice!!! Try again.\n");
         }
     }
     return 0;
